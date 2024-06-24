@@ -1,0 +1,59 @@
+IEEEexample.bib 
+V1.13 (2008/09/30)
+Copyright (c) 2002-2008 by Michael Shell
+See: http://www.michaelshell.org/
+for current contact information.
+ 
+@misc{cryptoeprint:2021/773,
+  author       = {Ripon Patgiri and Malaya Dutta Borah},
+  title        = {{HEX}-{BLOOM}: An Efficient Method for Authenticity and Integrity Verification in Privacy-preserving Computing},
+  howpublished = {Cryptology ePrint Archive, Paper 2021/773},
+  year         = {2021},
+  note         = {\url{https://eprint.iacr.org/2021/773}},
+  url          = {https://eprint.iacr.org/2021/773}
+}
+
+@inproceedings{8751389,
+  author    = {Kan, Jia and Kim, Kyeong Soo},
+  booktitle = {2019 IEEE International Conference on Blockchain and Cryptocurrency (ICBC)},
+  title     = {MTFS: Merkle-Tree-Based File System},
+  year      = {2019},
+  volume    = {},
+  number    = {},
+  pages     = {43-47},
+  keywords  = {Cryptography;Blockchain;Servers;Vegetation;Protocols;Peer-to-peer computing;File systems;Blockchain;Private file system;P2P Network},
+  doi       = {10.1109/BLOC.2019.8751389}
+}
+
+@inproceedings{10.1145/3464298.3493397,
+  author    = {Nygaard, Racin and Estrada-Gali\~{n}anes, Vero and Meling, Hein},
+  title     = {Snarl: entangled merkle trees for improved file availability and storage utilization},
+  year      = {2021},
+  isbn      = {9781450385343},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3464298.3493397},
+  doi       = {10.1145/3464298.3493397},
+  abstract  = {In cryptographic decentralized storage systems, files are split into chunks and distributed across a network of peers. These storage systems encode files using Merkle trees, a hierarchical data structure that provides integrity verification and lookup services. A Merkle tree maps the chunks of a file to a single root whose hash value is the file's content-address.A major concern is that even minor network churn can result in chunks becoming irretrievable due to the hierarchical dependencies in the Merkle tree. For example, chunks may be available but can not be found if all peers storing the root fail. Thus, to reduce the impact of churn, a decentralized replication process typically stores each chunk at multiple peers. However, we observe that this process reduces the network's storage utilization and is vulnerable to cascading failures as some chunks are replicated 10X less than others.We propose Snarl, a novel storage component that uses a variation of alpha entanglement codes to add user-controlled redundancy to address these problems. Our contributions are summarized as follows: 1) the design of an entangled Merkle tree, a resilient data structure that reduces the impact of hierarchical dependencies, and 2) the Snarl prototype to improve file availability and storage utilization in a real-world storage network. We evaluate Snarl using various failure scenarios on a large cluster running the Ethereum Swarm network. Our evaluation shows that Snarl increases storage utilization by 5X in Swarm with improved file availability. File recovery is bandwidth-efficient and uses less than 2X chunks on average in scenarios with up to 50\% of total chunk loss.},
+  booktitle = {Proceedings of the 22nd International Middleware Conference},
+  pages     = {236–247},
+  numpages  = {12},
+  keywords  = {storage utilization, file availability, erasure codes, entanglement codes, cryptographic decentralized storage system},
+  location  = {Qu\'{e}bec city, Canada},
+  series    = {Middleware '21}
+}
+
+Those fields that are not to be changed can be left out.
+@ieeetranbstctl{IEEEexample:BSTcontrol,
+  ctluse_article_number    = {yes},
+  ctluse_paper             = {yes},
+  ctluse_forced_etal       = {no},
+  ctlmax_names_forced_etal = {10},
+  ctlnames_show_etal       = {1},
+  ctluse_alt_spacing       = {yes},
+  ctlalt_stretch_factor    = {4},
+  ctldash_repeated_names   = {yes},
+  ctlname_format_string    = {{f.~}{vv~}{ll}{, jj}},
+  ctlname_latex_cmd        = {},
+  ctlname_url_prefix       = {[Online]. Available:}
+}
