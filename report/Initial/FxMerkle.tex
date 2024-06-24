@@ -1,0 +1,116 @@
+\documentclass[journal]{IEEEtran}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{hyperref}
+\graphicspath{{../pdf/}{../jpeg/}}
+\DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+
+\ifCLASSINFOpdf
+\else
+\fi
+
+\hyphenation{file-upload-download-verification}
+\begin{document}
+\bstctlcite{IEEEexample:BSTcontrol}
+\title{File Upload and Authentic Download}
+\author{MEHDI VALINEJAD,~\IEEEmembership{Blockchain Protocol Engineer}}
+
+\markboth{File Upload and Authentic Download, VOL.~01, NO.~01, June~2024}%
+{Shell \MakeLowercase{\textit{et al.}}: File Upload and Authentic Download}
+
+\maketitle
+
+\begin{abstract}
+In today’s world, file storage and sharing are essential. However, managing large amounts of data on local storage devices 
+like Hard Drives can be cumbersome. To address this, online storage solutions allow us to access files from anywhere without 
+physically carrying storage devices. But how can we ensure that the data remains unaltered during upload? Enter 
+the Merkle Tree Hash and its associated proof—a method to verify the integrity and correctness of downloaded data. 
+In this report, we explore various implementation and verification approaches for achieving this goal.
+Implementation and Notes can be found on \href{https://github.com/TxCorpi0x/file-upload-merkle}{file-upload-merkle}
+\end{abstract}
+
+\begin{IEEEkeywords}
+File Upload, File Download, File Server, Merkle Tree, Merkle Proof, Zero Knowledge Proof.
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
+\section{Experiment}
+
+\IEEEPARstart{T}{he} experiment of client-server file upload and Merkle Tree verification with the following steps:
+
+\begin{itemize}
+  \item File Upload and Merkle Hash Calculation:
+  \begin{enumerate}
+    \item Users upload a set of files using the client application.
+    \item Locally, the client calculates a Merkle Hash for the Merkle Tree root based on these files.
+    \item The client then sends an upload request to the server application.
+  \end{enumerate}
+  \item Server Logic:
+  \begin{enumerate}
+    \item The server application creates an identical Merkle Tree using the same files as the client.
+    \item It stores this Merkle Tree in server memory storage.
+  \end{enumerate}
+  \item Client Trust and Validation:
+  \begin{enumerate}
+    \item After uploading, the client can delete the local files.
+    \item When needed, the client can download a file from the server.
+    \item The client validates the file’s content integrity by comparing its proof against the stored Merkle root.
+  \end{enumerate}
+\end{itemize}
+This setup ensures data consistency and trust between the client and server during file transfers.
+
+% === II. Improvements ========================
+% =================================================================================
+\section{Planned Improvements}
+\subsection*{1. In-Place Tree Modification}
+
+The current file tree implementation lacks the ability to insert or delete files. To address this limitation, we propose 
+replacing the existing Merkle Tree with a Binary Merkle Tree. Unlike the traditional Merkle Tree, the Binary Merkle Tree 
+allows for efficient addition and deletion of nodes. Each individual tree element is hashed, and each node is associated 
+with a full key hash. The benefits of this approach:
+\begin{enumerate}
+  \item Fast Updates: The number of hash operations for adding or deleting nodes is proportional to the hash function’s bit length (independent of the tree’s size).
+  \item Authenticity: The root commits to the entire tree structure, indirectly validating all its leaves.
+  \item Deterministic: The order of insertions and deletions does not impact the tree structure1
+\end{enumerate}
+
+\subsection*{2. Alternative Verification Methods}
+\begin{enumerate}
+  \item Verkle Tree: a more efficient way of cryptographic structure with more compact proofs of data. 
+  \item MMR: Better performance and flexibility for the future proof selection for the more sophisticated file upload and download features.
+\end{enumerate}
+
+\subsection*{3. Alternative Academic Merkle Tree replacement potential}
+\begin{itemize}
+  \item HEX-BLOOM: Authenticity and Integrity verification using Bloom Filter and Exclusive-OR \cite{cryptoeprint:2021/773}. This can be implemented and integrated to the file upload and download solution.
+  \item MTFS: Merkle-Tree-Based File System using distributed random notes without a centralized controller to distribute files in a P2P network. \cite{8751389} 
+  \item Snarl: Uses merkle tree to reduce the impact of hierarchical dependency and cascading chunk failures. \cite{10.1145/3464298.3493397}. The method is not implemented, so it can be verified and be implemented support large or chunked file storage.
+\end{itemize}
+
+\subsection*{4. File Download Considerations}
+\begin{itemize}
+  \item Sandboxed File Download: Files need to be downloaded and their hash need to be recalculated to be able to verify their authenticity, so it the file is manipulated maliciously they need to be downloaded in a sandboxed environment locally before the hash and proof verification.
+\end{itemize}
+
+
+% === III. Literature ========================
+% =================================================================================
+\section{Literature}
+\subsection*{IPFS}
+Decentralized distributed file system protected by Merkle DAG (Directed Acyclic Graph ) as a replacement of Merkle tree which can be constructed from the leaves directly. the nodes can carry a payload and there is no balance restriction.
+\subsection*{Cassandra Anti-Entropy repair}
+Anti-entropy repair involves comparing data across all replicas and updating each replica to the most recent version. In Cassandra, this process consists of two phases: building a Merkle tree for each replica and then comparing these trees to identify any differences
+
+
+\ifCLASSOPTIONcaptionsoff
+  \newpage
+\fi
+
+\bibliographystyle{IEEEtran}
+
+\bibliography{IEEEabrv,Bibliography}
+
+\end{document}
+
+
