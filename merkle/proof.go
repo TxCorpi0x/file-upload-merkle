@@ -28,21 +28,22 @@ func (p *Proof) Verify(data []byte, rootHash hash.Hash, hasher hash.Hasher) (boo
 
 // Hash returns the proof hash.
 func (p *Proof) Hash(data []byte, hasher hash.Hasher) []byte {
-	var proofHash []byte
+	// generate the hash of data as start point
+	proofHash := hasher.Hash(data)
 
-	proofHash = hasher.Hash(data)
+	// find the index of last leaf hash
 	idx := p.Index + (1 << uint(len(p.Hashes)))
 
 	// calculate hashes for the proof
 	for _, hash := range p.Hashes {
 		if idx%2 == 0 {
-			// hash is on the left hand side of tree
+			// hash is on the left hand side of tree (branch)
 			proofHash = hasher.Hash(proofHash, hash)
 		} else {
-			// hash is on the right hand side of tree
+			// hash is on the right hand side of tree (branch)
 			proofHash = hasher.Hash(hash, proofHash)
 		}
-		// shift index right by one
+		// shift index right by one, means go one level up in the tree levels
 		idx >>= 1
 	}
 

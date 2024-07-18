@@ -5,10 +5,10 @@ TEST_FOLDER=.runtime/files
 .PHONY: start-server build-client
 
 start-server:
-	docker-compose up -d
+	docker compose up -d
 
 stop-server:
-	docker-compose down
+	docker compose down
 
 build-client:
 	go build -o $(BINARY_NAME) $(MODULE_NAME)/

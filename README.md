@@ -11,7 +11,7 @@ make build-client
 Run a containerized server on port `8080`.
 
 ```bash
-make start-server # or `docker-compose up` to attach to process. or ./fxmerkle server
+make start-server # or `docker compose up` to attach to process. or ./fxmerkle server
 ```
 
 Sample uploads: The following command, uploads the files under `.runtime/files` to the server and puts the corresponding hash to the `.runtime/merkleroot` file for further processing and file verification.
@@ -29,7 +29,7 @@ make test-download # ./fxmerkle client download 1
 Stop containerized server
 
 ```bash
-make stop-server # or `docker-compose down` to attach to process. 
+make stop-server # or `docker compose down` to attach to process. 
 ```
 
 ## Merkle tree Implementation
@@ -52,7 +52,7 @@ Addition to the [Limitations](https://github.com/fabiobozzo/merkle-file-uploader
 ### Implementation
 
 - The implemented Merkle tree does not support multi-proof, it can be implemented to support multiple proofs verification.
-- Support multi-chunck file upload to support large files.
+- Support multi-chunk file upload to support large files.
 - Support insertion and deletion using [bm](https://github.com/sorpaas/bm) in-place tree modification.
 - Use persistent data store instead of memory storage in the server.
 
